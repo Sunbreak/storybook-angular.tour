@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "taskbook"
+    }
+  },
+  "defaultProject": "taskbook",
+  "cli": {
+    "analytics": "fd7b4d46-0f4a-4aa9-8eee-97017663254c"
+  }
 }
