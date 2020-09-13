@@ -1,50 +1,40 @@
-import { action } from '@storybook/addon-actions';
-import { TaskComponent } from './task.component';
+import {Meta, Story} from '@storybook/angular/types-6-0';
+import {TaskComponent} from './task.component';
+
 export default {
   title: 'Task',
-  excludeStories: /.*Data$/,
+  component: TaskComponent,
+  argsTypes: {
+    onPinTask: {action: 'onPinTask'},
+    onArchiveTask: {action: 'onArchiveTask'},
+  },
+} as Meta;
+
+const Template: Story<TaskComponent> = (args: TaskComponent) => ({
+  component: TaskComponent,
+  props: args,
+});
+
+export const Default = Template.bind({});
+Default.args = {
+  task: {
+    id: '1',
+    title: 'Test Task',
+    state: 'Task_INBOX',
+    updated_at: new Date(2019, 0, 1, 9, 0),
+  },
 };
 
-export const actionsData = {
-  onPinTask: action('onPinTask'),
-  onArchiveTask: action('onArchiveTask'),
+export const Pinned = Template.bind({});
+Pinned.args = {
+  task: {
+    ...Default.args.task,
+    state: 'TASK_PINNED',
+  }
 };
 
-export const taskData = {
-  id: '1',
-  title: 'Test Task',
-  state: 'Task_INBOX',
-  updated_at: new Date(2019, 0, 1, 9, 0),
+export const Archived = Template.bind({});
+Archived.args = {
+  ...Default.args.task,
+  state: 'TASK_ARCHIVED',
 };
-export const Default = () => ({
-  component: TaskComponent,
-  props: {
-    task: taskData,
-    onPinTask: actionsData.onPinTask,
-    onArchiveTask: actionsData.onArchiveTask,
-  },
-});
-// pinned task state
-export const Pinned = () => ({
-  component: TaskComponent,
-  props: {
-    task: {
-      ...taskData,
-      state: 'TASK_PINNED',
-    },
-    onPinTask: actionsData.onPinTask,
-    onArchiveTask: actionsData.onArchiveTask,
-  },
-});
-// archived task state
-export const Archived = () => ({
-  component: TaskComponent,
-  props: {
-    task: {
-      ...taskData,
-      state: 'TASK_ARCHIVED',
-    },
-    onPinTask: actionsData.onPinTask,
-    onArchiveTask: actionsData.onArchiveTask,
-  },
-});
