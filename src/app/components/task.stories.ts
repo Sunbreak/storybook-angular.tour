@@ -4,7 +4,7 @@ import {TaskComponent} from './task.component';
 export default {
   title: 'Task',
   component: TaskComponent,
-  argsTypes: {
+  argTypes: {
     onPinTask: {action: 'onPinTask'},
     onArchiveTask: {action: 'onArchiveTask'},
   },
